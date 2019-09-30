@@ -1,0 +1,27 @@
+$text-white: #fff;
+
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == "extra-small" {
+    @media (min-width: 425px) {
+      @content;
+    }
+  }
+  @if $breakpoint == "small" {
+    @media (min-width: 767px) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint == "medium" {
+    @media (min-width: 992px) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint == "large" {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  }
+}

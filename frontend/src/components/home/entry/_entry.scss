@@ -1,0 +1,103 @@
+
+.entry {
+  height: 100vh;
+  min-height: 800px;
+
+  &__video {
+
+    // Color overlay
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      min-height: 800px;
+
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    // Compensates for borders created by blurring
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      min-height: 800px;
+      background: #000;
+      z-index: -2;
+      pointer-events: none;
+    }
+
+
+  }
+
+  &__text {
+    margin: auto;
+    z-index: 2;
+  }
+
+  &__title {
+    font-size: 10rem;
+    color: #fff;
+    font-weight: bold;
+    line-height: normal;
+    padding-top: 20vh;
+    z-index: 2;
+    position: relative;
+  }
+
+  &__subtext {
+    color: #fff;
+    z-index: 2;
+    width: 50%;
+    position: relative;
+  }
+
+  &__brand {
+    color: #fff;
+    padding: $spacing-06 $spacing-01;
+
+  }
+
+  &__navbar {
+    background-color: rgba(#000, .7);
+    padding: $spacing-05;
+
+    li {
+      padding: $spacing-03 0;
+      position: relative;
+
+      a {
+        color: #fff;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.video__vid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  min-width: 100%;
+  min-height: 100%;
+  filter: blur(5px);
+  margin: 0;
+  padding: 0;
+  background-size: cover;
+  overflow: hidden;
+
+  &__src {
+
+  }
+}
+
+.call-to-action {
+
+}

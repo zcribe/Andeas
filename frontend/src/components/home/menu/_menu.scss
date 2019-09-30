@@ -1,0 +1,41 @@
+.menu {
+  height: 100vh;
+  min-height: 800px;
+  width: 100%;
+  background-color: #fff;
+  z-index: 0;
+
+  &__title {
+    z-index: 1;
+    padding-top: $spacing-10;
+    padding-bottom: $spacing-10;
+
+    &__core {
+      z-index: 1;
+      font-size: 6rem;
+      font-weight: bold;
+      line-height: normal;
+
+    }
+  }
+
+  &__text-decoration {
+    color: #c9deff;
+    position: relative;
+    right: -30vw;
+    font-size: 20rem;
+    font-weight: bold;
+    opacity: .2;
+    height: 0;
+    overflow: visible;
+    user-select: none;
+
+
+  }
+
+
+  &__slider {
+    height: 50vh;
+    overflow: hidden;
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "name": "andeas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.dev.js",
+  "scripts": {
+    "start": "webpack-dev-server --mode development --config webpack.config.dev.js --open",
+    "dev": "webpack --mode development --config webpack.config.dev.js",
+    "build": "webpack --mode production --config webpack.config.prod.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^3.2.0",
+    "fast-sass-loader": "^1.5.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "node-sass": "^4.12.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.40.2",
+    "webpack-bundle-tracker": "^0.4.2-beta",
+    "webpack-cli": "^3.3.8",
+    "webpack-dev-server": "^3.8.0"
+  },
+  "dependencies": {
+    "@carbon/grid": "^10.6.0",
+    "@carbon/icons-react": "^10.6.0",
+    "carbon-components": "^10.6.1",
+    "carbon-components-react": "^7.6.1",
+    "carbon-icons": "^7.0.7",
+    "file-loader": "^4.2.0",
+    "google-maps-react": "^2.0.2",
+    "pigeon-maps": "^0.14.0",
+    "pigeon-marker": "^0.3.4",
+    "pigeon-overlay": "^0.2.3",
+    "pure-react-carousel": "^1.22.0",
+    "react-image-gallery": "^0.9.1",
+    "react-router-dom": "^5.0.1"
+  }
+}

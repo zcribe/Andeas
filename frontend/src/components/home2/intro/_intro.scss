@@ -1,0 +1,89 @@
+
+.homepage__section--intro {
+  grid-area: intro;
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+
+}
+
+
+.navbar {
+  grid-column: 12 / 16;
+  grid-row: 3 / 6;
+
+  @include respond-to("extra-small") {
+    grid-column: 1 / 16;
+  }
+
+  @include respond-to("small") {
+    grid-column: 10 / 14;
+  }
+
+  @include respond-to("medium") {
+    grid-column: 12 / 16;
+  }
+
+  &__list {
+    background-color: rgba(#000, .7);
+    padding: $spacing-05;
+    width: 15rem;
+
+    @include respond-to("extra-small") {
+      margin: auto;
+    }
+  }
+
+  &__nav {
+    padding: $spacing-03 0;
+
+    a {
+      color: $text-white;
+      text-decoration: none;
+    }
+  }
+}
+
+.story {
+  grid-column: 2 / 10;
+  grid-row: 7 / 10;
+
+  @include respond-to("extra-small") {
+    grid-row: 7 / 10;
+    grid-column: 2 / 16;
+  }
+
+  @include respond-to("small") {
+    grid-column: 2 / 16;
+  }
+
+  @include respond-to("medium") {
+    grid-column: 2 / 10;
+    grid-row: 7 / 10;
+  }
+
+  &__title {
+    color: $text-white;
+    font-size: 10rem;
+    font-weight: bold;
+    line-height: normal;
+    z-index: 10;
+
+    @include respond-to("extra-small") {
+      font-size: 6rem;
+    }
+
+    @include respond-to("small") {
+      font-size: 8rem;
+    }
+
+    @include respond-to("medium") {
+      font-size: 10rem;
+    }
+  }
+
+  &__subtext {
+    color: $text-white;
+  }
+}
+

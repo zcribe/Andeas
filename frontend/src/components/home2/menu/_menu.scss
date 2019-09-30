@@ -1,0 +1,90 @@
+.homepage__section--menu {
+  grid-area: menu;
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  overflow: hidden;
+}
+
+.carousel {
+  grid-column: 2 / 16;
+  margin-bottom: $spacing-02;
+  z-index: 1;
+
+  &--1 {
+    grid-row: 4 / 7;
+  }
+
+  &--2 {
+    grid-row: 7 / 10;
+  }
+
+
+}
+
+.slide {
+  &__core {
+    //height: 100%;
+    //width: auto;
+  }
+}
+
+
+.menu {
+  &__item {
+    padding: 1rem;
+  }
+
+  &__title {
+    position: absolute;
+    top: 10px;
+    left: 5px;
+    color: white;
+    line-height: unset;
+    background: black;
+    padding: 3px;
+    font-weight: normal;
+    z-index: 2;
+
+    @include respond-to("medium") {
+      font-size: 1.5rem;
+    }
+  }
+
+  &__price {
+    position: absolute;
+    top: 10px;
+    right: 5px;
+    color: white;
+    line-height: unset;
+    background: black;
+    padding: 3px;
+    font-weight: bold;
+    z-index: 2;
+
+    @include respond-to("medium") {
+      font-size: 1.2rem;
+    }
+
+  }
+
+  &__image-container {
+
+  }
+
+  &__image {
+
+
+  }
+
+}
+
+.carousel {
+  &__zoom-image {
+    background-position: center;
+
+    &-overlay {
+      background-position: center;
+    }
+  }
+}
