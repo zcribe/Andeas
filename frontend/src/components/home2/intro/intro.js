@@ -9,7 +9,7 @@ class Intro extends Component {
         return (
             <div className="homepage__section homepage__section--intro">
                 <div className="brand">
-                    ANDEAS
+                    <img className={"brand__core"} src="/static/img/logo/logo_transparent.png" alt="andeas brand"/>
                 </div>
                 <div className="cta">
                     <a href="/reserve-a-table">

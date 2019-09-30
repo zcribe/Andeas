@@ -17,7 +17,7 @@ class Entry extends Component {
 
                 <div className="bx--row">
                     <div className="bx--col-md-4">
-                        <section className="entry__brand">ANDEAS</section>
+                        <section className="entry__brand"><img src="/static/img/twitter_header_photo_1.png" alt="andeas brand"/></section>
                     </div>
                 </div>
                 <div className="bx--row">

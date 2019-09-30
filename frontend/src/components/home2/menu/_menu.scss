@@ -10,6 +10,7 @@
   grid-column: 2 / 16;
   margin-bottom: $spacing-02;
   z-index: 1;
+  overflow: hidden;
 
   &--1 {
     grid-row: 4 / 7;

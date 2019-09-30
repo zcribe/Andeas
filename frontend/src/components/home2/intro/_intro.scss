@@ -28,6 +28,7 @@
     background-color: rgba(#000, .7);
     padding: $spacing-05;
     width: 15rem;
+    list-style: none;
 
     @include respond-to("extra-small") {
       margin: auto;
@@ -84,6 +85,15 @@
 
   &__subtext {
     color: $text-white;
+  }
+}
+
+.brand {
+  margin: -50px 0;
+  &__core {
+    height: 150px;
+    width: auto;
+    filter: brightness(3);
   }
 }
 
