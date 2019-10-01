@@ -1,8 +1,24 @@
 import React, {Component} from 'react';
 
-import Tag from "carbon-components-react/lib/components/Tag/Tag"
+import SingleNews from "./singlenews";
 
 class News extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: [],
+        }
+
+    }
+
+    componentDidMount() {
+        fetch("api/core/news-item/")
+            .then(res => res.json())
+            .then((data) => {
+                this.setState({data: data})
+            })
+    }
+
     render() {
         return (
             <div className="homepage__section homepage__section--news" id={"news"}>
@@ -12,43 +28,11 @@ class News extends Component {
                     </h2>
                 </div>
                 <div className="card-group">
-                    <div className="card-group__item">
-                        <h3 className="item__title">
-                            Kitchen Assistant
-                        </h3>
-                        <p className="item__content">
-                            While not happy about losing his long-time starting job, Eli Manning knew there was a the
-                            New York quarterback if the team got off to a bad start.
-                        </p>
-                        <div className="item__tags">
-                            <Tag type="blue" className="tag">Job</Tag>
-                        </div>
-                    </div>
-                    <div className="card-group__item">
-                        <h3 className="item__title">
-                            Kitchen Assistant
-                        </h3>
-                        <p className="item__content">
-                            While not happy about losing his long-time starting job, Eli Manning knew there was a the
-                            New York quarterback if the team got off to a bad start.
-                        </p>
-                        <div className="item__tags">
-                            <Tag type="blue" className="tag">Job</Tag>
-                        </div>
-                    </div>
-                    <div className="card-group__item">
-                        <h3 className="item__title">
-                            Kitchen Assistant
-                        </h3>
-                        <p className="item__content">
-                            While not happy about losing his long-time starting job, Eli Manning knew there was a the
-                            New York quarterback if the team got off to a bad start.
-                        </p>
-                        <div className="item__tags">
-                            <Tag type="blue" className="tag">Job</Tag>
-                        </div>
-                    </div>
-
+                    {
+                        this.state.data.map(function (data) {
+                            return <SingleNews item={data} key={data.id}/>
+                        })
+                    }
                 </div>
                 <div className="background background--video">
                     <video className="video" autoPlay muted loop>

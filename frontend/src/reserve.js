@@ -18,6 +18,10 @@ import "./components/reserve/reserve.scss"
 
 
 class Reserve extends Component {
+    constructor(props){
+        super(props)
+    }
+
     render() {
         return (
             <div className="homepage__section homepage__section--menu" id={"reserve"}>
@@ -38,14 +42,14 @@ class Reserve extends Component {
                     <div className={"form__reservation"}>
                         <h3>Reservation information</h3>
                         <NumberInput min={1} max={10} value={1} label={"Number of people"} id={"people"}
-                                     className={"form__item form__people"}/>
+                                     className={"form__item form__people"} required/>
                         <DatePicker placeholder={"dd/mm/yyyy"} datePickerType="single"
-                                    className={"form__item form__date"}>
-                            <DatePickerInput labelText={"Day of reservation"} id={"date"}/>
+                                    className={"form__item form__date"} >
+                            <DatePickerInput labelText={"Day of reservation"} id={"date"} required/>
                         </DatePicker>
 
                         <TimePickerSelect labelText={"Time"} className={"form__time form__item"} hideLabel={false}
-                                          id={"time"}>
+                                          id={"time"} required>
                             <SelectItem text={"18:00"} value={18}/>
                             <SelectItem text={"19:00"} value={19}/>
                             <SelectItem text={"20:00"} value={20}/>
@@ -56,14 +60,14 @@ class Reserve extends Component {
                     <div className={"form__personal"}>
                         <h3>Contact information</h3>
                         <TextInput labelText={"Name"} className={"form__item"} type={"text"} placeholder={"Mari Mets"}
-                                   id={"name"} helperText={"Who do we let in."}/>
-                        <TextInput labelText={"Email"} className={"form__item"} type={"string"}
+                                   id={"name"} helperText={"Who do we let in."} required/>
+                        <TextInput labelText={"Email"} className={"form__item"} type={"email"}
                                    placeholder={"mina@gmail.com"} id={"email"}
-                                   helperText={"Where to send the confirmation."}/>
+                                   helperText={"Where to send the confirmation."} required/>
                         <TextInput labelText={"Phone"} className={"form__item"} type={"number"} placeholder={"53559422"}
-                                   id={"phone"} helperText={"Where do we contact you."}/>
+                                   id={"phone"} helperText={"Where do we contact you."} required/>
                         <TextInput labelText={"Write Andeas here"} className={"form__item"} placeholder={"Andeas"}
-                                   id={"check"} helperText={"Lets us avoid bots."}/>
+                                   id={"check"} helperText={"Lets us avoid bots."} required/>
                         <Button type={"submit"} className={"form__submit"}>Send us your request</Button>
                     </div>
                     {/*<Button type="submit" className="some-class">*/}
