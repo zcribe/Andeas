@@ -57,10 +57,25 @@
 
   &__title {
     color: #fff;
+    @include respond-to("medium") {
+    }
+    @include respond-to("small") {
+      font-size: 1rem;
+      font-weight: bold;
+      line-height: initial;
+    }
   }
 
   &__content {
     color: #fff;
+    @include respond-to("medium") {
+      max-height: 20vh;
+      overflow: hidden;
+    }
+    @include respond-to("small") {
+      max-height: 10vh;
+      overflow: hidden;
+    }
   }
 
   &__tags {
