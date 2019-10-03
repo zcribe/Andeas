@@ -2945,3 +2945,5 @@ remove node_modules/tar/coverage/lcov-report/prettify.css
 node_modules/typedarray/
 e node_modules/webpack-dev-server/node_modules/yargs-parser/CHANGELOG.md
 node_modules/worker-farm/index.d.ts
+
+settings.py
