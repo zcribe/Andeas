@@ -52,7 +52,7 @@ class Menu extends Component {
                         }
                     </Slider>
                     <div className={"carousel__nav"}>
-                        <ButtonBack className={"bx--btn bx--btn--primary carousel__nav--1"}>
+                        <ButtonBack className={"bx--pagination-nav__page bx--pagination-nav__page--direction"}>
                             Back
                         </ButtonBack>
                         <ButtonNext className={"bx--btn bx--btn--primary carousel__nav--2"}>

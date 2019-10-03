@@ -1,12 +1,17 @@
 import React, {Component} from 'react';
 
 import SingleNews from "./singlenews";
+import {ButtonBack, ButtonNext, CarouselProvider, Slider} from "pure-react-carousel";
+import {Icon} from "@carbon/icons-react";
+import {ArrowLeft16, ArrowRight16} from "@carbon/icons-react";
+
 
 class News extends Component {
     constructor(props) {
         super(props);
         this.state = {
             data: [],
+            visibleSlides: 2
         }
 
     }
@@ -27,13 +32,46 @@ class News extends Component {
                         News
                     </h2>
                 </div>
-                <div className="card-group">
-                    {
-                        this.state.data.map(function (data) {
-                            return <SingleNews item={data} key={data.id}/>
-                        })
-                    }
-                </div>
+                {/*<div className="card-group">*/}
+                {/*    {*/}
+                {/*        this.state.data.map(function (data) {*/}
+                {/*            return <SingleNews item={data} key={data.id}/>*/}
+                {/*        })*/}
+                {/*    }*/}
+                {/*</div>*/}
+
+                <CarouselProvider
+                    naturalSlideWidth={1}
+                    naturalSlideHeight={1}
+                    totalSlides={Object.keys(this.state.data).length}
+                    visibleSlides={this.state.visibleSlides}
+                    step={this.state.visibleSlides}
+                    className={"card-group"}
+                >
+                    <Slider className={"card-group__slider"}>
+                        {
+                            this.state.data.map(function (data) {
+                                return <SingleNews item={data} key={data.id}/>
+                            })
+                        }
+                    </Slider>
+                    <Slider className={"card-group__slider"}>
+                        {
+                            this.state.data.map(function (data) {
+                                return <SingleNews item={data} key={data.id}/>
+                            })
+                        }
+                    </Slider>
+                    <div className={"carousel__nav"}>
+                        <ButtonBack className={"bx--btn bx--btn--secondary bx--btn--icon-only carousel__nav--1"}>
+                            <ArrowLeft16 className={"fill--white"}/>
+                        </ButtonBack>
+                        <ButtonNext className={"bx--btn bx--btn--primary bx--btn--icon-only carousel__nav--2"}>
+                            <ArrowRight16 className={"fill--white"}/>
+                        </ButtonNext>
+                    </div>
+
+                </CarouselProvider>
                 <div className="background background--video">
                     <video className="video" autoPlay muted loop>
                         <source src="/static/video/cookin2.mp4" type="video/mp4" className="video__src"/>

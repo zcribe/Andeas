@@ -9,47 +9,53 @@
 .card-group {
   grid-column: 6 / 16;
   grid-row: 4 / 10;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  grid-gap: $spacing-05;
-
-  @include respond-to("extra-small") {
-    grid-column: 1 / 17;
-    grid-row: 3 / 10;
-    display: flex;
-    flex-direction: column;
-  }
-
-  @include respond-to("small") {
-    grid-column: 2 / 16;
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @include respond-to("medium") {
-    display: grid;
-    grid-column: 6 / 16;
-    grid-row: 4 / 10;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-gap: $spacing-05;
-  }
-
-  @include respond-to("large") {
-    display: grid;
-    grid-column: 6 / 16;
-    grid-row: 4 / 10;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-gap: $spacing-05;
-  }
+  //display: grid;
+  //grid-template-columns: repeat(3, 1fr);
+  //grid-template-rows: repeat(2, 1fr);
+  //grid-gap: $spacing-05;
+  //
+  //@include respond-to("extra-small") {
+  //  grid-column: 1 / 17;
+  //  grid-row: 3 / 10;
+  //  display: flex;
+  //  flex-direction: column;
+  //}
+  //
+  //@include respond-to("small") {
+  //  grid-column: 2 / 16;
+  //  grid-template-columns: repeat(2, 1fr);
+  //}
+  //
+  //@include respond-to("medium") {
+  //  display: grid;
+  //  grid-column: 6 / 16;
+  //  grid-row: 4 / 10;
+  //  grid-template-columns: repeat(3, 1fr);
+  //  grid-template-rows: repeat(2, 1fr);
+  //  grid-gap: $spacing-05;
+  //}
+  //
+  //@include respond-to("large") {
+  //  display: grid;
+  //  grid-column: 6 / 16;
+  //  grid-row: 4 / 10;
+  //  grid-template-columns: repeat(4, 1fr);
+  //  grid-template-rows: repeat(2, 1fr);
+  //  grid-gap: $spacing-05;
+  //}
 
 
   &__item {
-    background-color: rgba(#171717, .7);
+    background-color: rgba(#171717, 1);
     padding: $spacing-04;
-
+    margin: $spacing-05;
+    height: 100%;
   }
+
+  &__slider {
+    max-height: 40%;
+  }
+
 }
 
 .item {
@@ -57,25 +63,14 @@
 
   &__title {
     color: #fff;
-    @include respond-to("medium") {
-    }
-    @include respond-to("small") {
-      font-size: 1rem;
-      font-weight: bold;
-      line-height: initial;
-    }
+    max-height: 40%;
+    overflow: hidden;
   }
 
   &__content {
     color: #fff;
-    @include respond-to("medium") {
-      max-height: 20vh;
-      overflow: hidden;
-    }
-    @include respond-to("small") {
-      max-height: 10vh;
-      overflow: hidden;
-    }
+    max-height: 40%;
+    overflow: hidden;
   }
 
   &__tags {
@@ -84,4 +79,11 @@
 }
 
 .tag {
+}
+
+.fill{
+  &__white {
+    fill: #fff;
+    fill: #fff;
+  }
 }
