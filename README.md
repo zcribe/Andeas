@@ -11,7 +11,7 @@ Restaurant brochure website in order to learn:
 
 ## Reserve a table :
 Simple reserve form
-![2](https://github.com/zcribe/andeas/docs/blob/master/images/andeas-reserve.png)
+![2](https://github.com/zcribe/andeas/blob/master/docs/images/andeas-reserve.png)
 
 ## Contact forms :
 Simple contact form
