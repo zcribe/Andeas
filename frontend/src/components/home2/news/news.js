@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 
 import SingleNews from "./singlenews";
 import {ButtonBack, ButtonNext, CarouselProvider, Slider} from "pure-react-carousel";
-import {Icon} from "@carbon/icons-react";
 import {ArrowLeft16, ArrowRight16} from "@carbon/icons-react";
 
 
@@ -11,17 +10,37 @@ class News extends Component {
         super(props);
         this.state = {
             data: [],
+            newsRowOne: [],
+            newsRowTwo: [],
             visibleSlides: 2
-        }
-
+        };
+        this.chunk = this.chunk.bind()
     }
 
     componentDidMount() {
         fetch("api/core/news-item/")
             .then(res => res.json())
             .then((data) => {
-                this.setState({data: data})
+                const chunks = this.chunk(data, 50);
+                this.setState({
+                    data: data,
+                    newsRowOne:chunks[0],
+                    newsRowTwo:chunks[1]
+                })
             })
+    }
+
+    chunk(arr, len) {
+
+        let chunks = [],
+            i = 0,
+            n = arr.length;
+
+        while (i < n) {
+            chunks.push(arr.slice(i, i += len));
+        }
+
+        return chunks;
     }
 
     render() {
@@ -32,14 +51,6 @@ class News extends Component {
                         News
                     </h2>
                 </div>
-                {/*<div className="card-group">*/}
-                {/*    {*/}
-                {/*        this.state.data.map(function (data) {*/}
-                {/*            return <SingleNews item={data} key={data.id}/>*/}
-                {/*        })*/}
-                {/*    }*/}
-                {/*</div>*/}
-
                 <CarouselProvider
                     naturalSlideWidth={1}
                     naturalSlideHeight={1}
@@ -50,14 +61,14 @@ class News extends Component {
                 >
                     <Slider className={"card-group__slider"}>
                         {
-                            this.state.data.map(function (data) {
+                            this.state.newsRowOne.map(function (data) {
                                 return <SingleNews item={data} key={data.id}/>
                             })
                         }
                     </Slider>
                     <Slider className={"card-group__slider"}>
                         {
-                            this.state.data.map(function (data) {
+                            this.state.newsRowTwo.map(function (data) {
                                 return <SingleNews item={data} key={data.id}/>
                             })
                         }

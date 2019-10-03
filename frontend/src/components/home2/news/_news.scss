@@ -61,6 +61,17 @@
 .item {
   display: flex;
 
+  &__details{
+    display: flex;
+    align-items: center;
+  }
+
+  &__date {
+    color: rgba(#fff, .7);
+    font-weight: bold;
+    margin-left: auto;
+  }
+
   &__title {
     color: #fff;
     max-height: 40%;
@@ -68,7 +79,7 @@
   }
 
   &__content {
-    color: #fff;
+    color: rgba(#fff, .7);
     max-height: 40%;
     overflow: hidden;
   }
