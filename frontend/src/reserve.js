@@ -2,25 +2,145 @@ import React, {Component} from 'react';
 import ReactDOM from "react-dom";
 
 import Form from "carbon-components-react/lib/components/Form/Form";
-import {
-    Breadcrumb,
-    BreadcrumbItem,
-    Button,
-    DatePicker,
-    DatePickerInput,
-    NumberInput,
-    SelectItem,
-    TextInput,
-    TimePickerSelect
-} from "carbon-components-react"
+import {Breadcrumb, BreadcrumbItem, ProgressIndicator, ProgressStep} from "carbon-components-react"
+import Button from "carbon-components-react/lib/components/Button/Button";
 
 import "./components/reserve/reserve.scss"
+import StageOne from "./components/reserve/stageOne";
+import StageTwo from "./components/reserve/stageTwo";
+import StageThree from "./components/reserve/stageThree";
 
 
 class Reserve extends Component {
-    constructor(props){
-        super(props)
+    constructor(props) {
+        super(props);
+        this.state = {
+            currentStep: 1,
+            people: 2,
+            date: "",
+            time: "",
+            name: "",
+            email: "",
+            phone: "",
+            check: "",
+            sendConfirm: "unchecked"
+        };
+
+
+        this._next = this._next.bind(this);
+        this._prev = this._prev.bind(this);
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleRadioChange = this.handleRadioChange.bind(this);
+        this.handleDateChange = this.handleDateChange.bind(this);
+        this.handleTimeChange = this.handleTimeChange.bind(this);
+
+        this.submitButton = this.submitButton.bind(this);
+
     }
+
+    handleChange(event) {
+        const {name, value} = event.target;
+        this.setState({
+            [name]: value
+        })
+    }
+
+    handleRadioChange(value) {
+        this.setState({
+            people: value
+        })
+    }
+
+    handleDateChange(value) {
+        this.setState({
+            date: value[0]
+        })
+    }
+
+    handleTimeChange(value) {
+        this.setState({
+            time: value
+        })
+    }
+
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        const {people, date, time} = this.state;
+        alert(`Your registration detail: \n 
+      Email: ${people} \n 
+      Username: ${date} \n
+      Password: ${time}`)
+    };
+
+    _next() {
+        let currentStep = this.state.currentStep;
+        // If the current step is 1 or 2, then add one on "next" button click
+        currentStep = currentStep > 2 ? 3 : currentStep + 1;
+        this.setState({
+            currentStep: currentStep
+        })
+    }
+
+    _prev() {
+        let currentStep = this.state.currentStep;
+        // If the current step is 2 or 3, then subtract one on "previous" button click
+        currentStep = currentStep <= 1 ? 1 : currentStep - 1;
+        this.setState({
+            currentStep: currentStep
+        })
+    }
+
+    // The "next" and "previous" button functions
+    previousButton() {
+        let currentStep = this.state.currentStep;
+        // If the current step is not 1, then render the "previous" button
+        if (currentStep !== 1) {
+            return (
+
+                <Button
+                    className="bx--btn bx--btn--secondary"
+                    type="button" onClick={this._prev}>
+                    Previous
+                </Button>
+            )
+        }
+        // ...else return nothing
+        return null;
+    }
+
+    nextButton() {
+        let currentStep = this.state.currentStep;
+        // If the current step is not 3, then render the "next" button
+        if (currentStep < 3) {
+            return (
+                <Button
+                    className="bx--btn bx--btn--primary"
+                    type="button" onClick={this._next}>
+                    Next
+                </Button>
+            )
+        }
+        // ...else render nothing
+        return null;
+    }
+
+    submitButton() {
+        let currentStep = this.state.currentStep;
+        if (currentStep === 3) {
+            return (
+                <Button
+                    type={"submit"}
+                    className={""}
+                >
+                    Reserve a table
+                </Button>
+            )
+        }
+        return null;
+    }
+
 
     render() {
         return (
@@ -38,44 +158,75 @@ class Reserve extends Component {
                         Reserve a table
                     </BreadcrumbItem>
                 </Breadcrumb>
-                <Form className={"reserve__form"}>
-                    <div className={"form__reservation"}>
-                        <h3>Reservation information</h3>
-                        <NumberInput min={1} max={10} value={1} label={"Number of people"} id={"people"}
-                                     className={"form__item form__people"} required/>
-                        <DatePicker placeholder={"dd/mm/yyyy"} datePickerType="single"
-                                    className={"form__item form__date"} >
-                            <DatePickerInput labelText={"Day of reservation"} id={"date"} required/>
-                        </DatePicker>
+                <div className={"reserve__progress"}>
+                    <ProgressIndicator
+                        currentIndex={this.state.currentStep - 1}
 
-                        <TimePickerSelect labelText={"Time"} className={"form__time form__item"} hideLabel={false}
-                                          id={"time"} required>
-                            <SelectItem text={"18:00"} value={18}/>
-                            <SelectItem text={"19:00"} value={19}/>
-                            <SelectItem text={"20:00"} value={20}/>
-                            <SelectItem text={"21:00"} value={21}/>
-                            <SelectItem text={"22:00"} value={22}/>
-                        </TimePickerSelect>
-                    </div>
-                    <div className={"form__personal"}>
-                        <h3>Contact information</h3>
-                        <TextInput labelText={"Name"} className={"form__item"} type={"text"} placeholder={"Mari Mets"}
-                                   id={"name"} helperText={"Who do we let in."} required/>
-                        <TextInput labelText={"Email"} className={"form__item"} type={"email"}
-                                   placeholder={"mina@gmail.com"} id={"email"}
-                                   helperText={"Where to send the confirmation."} required/>
-                        <TextInput labelText={"Phone"} className={"form__item"} type={"number"} placeholder={"53559422"}
-                                   id={"phone"} helperText={"Where do we contact you."} required/>
-                        <TextInput labelText={"Write Andeas here"} className={"form__item"} placeholder={"Andeas"}
-                                   id={"check"} helperText={"Lets us avoid bots."} required/>
-                        <Button type={"submit"} className={"form__submit"}>Send us your request</Button>
-                    </div>
-                    {/*<Button type="submit" className="some-class">*/}
-                    {/*    Submit*/}
-                    {/*</Button>*/}
+                    >
+                        <ProgressStep
+                            label={"1: Reserve"}
+                            description={"Step 1: The date and time"}
+                            secondaryLabel={"When?"}
 
-                </Form>
+                        />
+                        <ProgressStep
+                            label={"2: Contact"}
+                            description={"Step 2: Contact information"}
+                            secondaryLabel={"Who do we let in?"}
 
+
+                        />
+                        <ProgressStep
+                            label={"3: Review"}
+                            description={"Step 3: Review & Confirm"}
+                            secondaryLabel={"Let's make sure."}
+
+
+                        />
+                    </ProgressIndicator>
+                </div>
+                <React.Fragment>
+                    <Form
+                        onSubmit={this.handleSubmit}
+                        className={"reserve__form"}
+                    >
+                        <StageOne
+                            currentStep={this.state.currentStep}
+                            handleRadio={this.handleRadioChange}
+                            handleDate={this.handleDateChange}
+                            handleTime={this.handleTimeChange}
+                            people={this.state.people}
+                            date={this.state.date}
+                            time={this.state.time}
+
+                        />
+                        <StageTwo
+                            currentStep={this.state.currentStep}
+                            handleChange={this.handleChange}
+                            name={this.state.name}
+                            email={this.state.email}
+                            phone={this.state.phone}
+                            check={this.state.check}
+                        />
+                        <StageThree
+                            currentStep={this.state.currentStep}
+                            handleChange={this.handleChange}
+                            name={this.state.name}
+                            email={this.state.email}
+                            phone={this.state.phone}
+                            check={this.state.check}
+                            people={this.state.people}
+                            date={this.state.date}
+                            time={this.state.time}
+                            sendConfirmation={this.state.sendConfirm}
+                        />
+                        <div className={"reserve__progress-navs"}>
+                            {this.previousButton()}
+                            {this.nextButton()}
+                            {this.submitButton()}
+                        </div>
+                    </Form>
+                </React.Fragment>
 
                 <div className="decorations decorations--1">
                     <div className="decorations__text ">

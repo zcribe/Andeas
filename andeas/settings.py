@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     'core',
     'frontend',
+    'reservations'
 ]
 
 SITE_ID = 1

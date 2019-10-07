@@ -1,3 +1,30 @@
 from django.db import models
 
-# Create your models here.
+
+class TimeStampedModel(models.Model):
+    created = models.DateTimeField(auto_now_add=True, db_index=True)
+    modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
+
+
+class Room(TimeStampedModel):
+    name = models.TextField()
+    layout = models.ImageField()
+
+
+class Table(TimeStampedModel):
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    capacity = models.IntegerField()
+    reserved = models.BooleanField()
+    full = models.BooleanField()
+
+
+class Reservation(TimeStampedModel):
+    name = models.TextField()
+    email = models.TextField()
+    phone = models.IntegerField()
+    people = models.IntegerField()
+    table = models.ForeignKey(Table, on_delete=models.CASCADE)
+    reminder = models.BooleanField()
