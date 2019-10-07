@@ -4,17 +4,17 @@ from .models import Room, Table, Reservation
 from .serializers import RoomSerializer, TableSerializer, ReservationSerializer
 
 
-class RoomCreate(generics.ListCreateAPIView):
+class RoomView(generics.ListCreateAPIView):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
 
 
-class TableCreate(generics.ListCreateAPIView):
+class TableView(generics.ListCreateAPIView):
     queryset = Table.objects.all()
     serializer_class = TableSerializer
 
 
-class ReservationCreate(generics.ListCreateAPIView):
+class ReservationView(generics.ListCreateAPIView):
     queryset = Reservation.objects.all()
     serializer_class = ReservationSerializer
 

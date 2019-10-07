@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ReactDOM from "react-dom";
 
 import Form from "carbon-components-react/lib/components/Form/Form";
-import {Breadcrumb, BreadcrumbItem, ProgressIndicator, ProgressStep} from "carbon-components-react"
+import {Breadcrumb, BreadcrumbItem, ProgressIndicator, ProgressStep, ToastNotification} from "carbon-components-react"
 import Button from "carbon-components-react/lib/components/Button/Button";
 
 import "./components/reserve/reserve.scss"
@@ -23,7 +23,16 @@ class Reserve extends Component {
             email: "",
             phone: "",
             check: "",
-            sendConfirm: "unchecked"
+            table: 0,
+            sendConfirm: "unchecked",
+            reminder: true,
+            formInvalid: false,
+
+            messageShow: false,
+            messageKind: "success",
+            messageTitle: "Successful",
+            messageSubtitle:"Nothin"
+
         };
 
 
@@ -67,11 +76,33 @@ class Reserve extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        const {people, date, time} = this.state;
-        alert(`Your registration detail: \n 
-      Email: ${people} \n 
-      Username: ${date} \n
-      Password: ${time}`)
+        const {name, email, phone, people, reminder, table,} = this.state;
+        const lead = {name, email, phone, people, reminder, table,};
+        const conf = {
+            method: "post",
+            body: JSON.stringify(lead),
+            headers: new Headers({"Content-Type": "application/json"})
+        };
+        fetch("http://127.0.0.1:8000/api/reservations/reservation/", conf).then(
+            response => {
+                if (response.status !== 201) {
+                    return this.setState({
+                        formInvalid: true,
+                        messageShow: true,
+                        messageKind: "error",
+                        messageTitle: response.status + " : " + response.statusText,
+                        messageSubtitle: "",
+                    })
+                }
+                return this.setState({
+                        formInvalid: false,
+                        messageShow: true,
+                        messageKind: "success",
+                        messageTitle: response.status + " : " + response.statusText,
+                        messageSubtitle: response.statusText,
+                    })
+            }
+        )
     };
 
     _next() {
@@ -158,6 +189,16 @@ class Reserve extends Component {
                         Reserve a table
                     </BreadcrumbItem>
                 </Breadcrumb>
+                { this.state.messageShow ? (
+                    <ToastNotification
+                        className={"reserve__messages"}
+                        title={this.state.messageTitle}
+                        subtitle={this.state.messageSubtitle}
+                        kind={this.state.messageKind}
+                    />
+                    ) : null
+
+                }
                 <div className={"reserve__progress"}>
                     <ProgressIndicator
                         currentIndex={this.state.currentStep - 1}
@@ -189,6 +230,7 @@ class Reserve extends Component {
                     <Form
                         onSubmit={this.handleSubmit}
                         className={"reserve__form"}
+                        i={"reserve"}
                     >
                         <StageOne
                             currentStep={this.state.currentStep}
