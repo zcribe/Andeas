@@ -2,13 +2,15 @@ import React, {Component} from 'react';
 import ReactDOM from "react-dom";
 
 import Form from "carbon-components-react/lib/components/Form/Form";
-import {Breadcrumb, BreadcrumbItem, ProgressIndicator, ProgressStep, ToastNotification} from "carbon-components-react"
+import {Breadcrumb, BreadcrumbItem, ProgressIndicator, ProgressStep} from "carbon-components-react"
 import Button from "carbon-components-react/lib/components/Button/Button";
+
 
 import "./components/reserve/reserve.scss"
 import StageOne from "./components/reserve/stageOne";
 import StageTwo from "./components/reserve/stageTwo";
 import StageThree from "./components/reserve/stageThree";
+import Messages from "./components/reserve/messages";
 
 
 class Reserve extends Component {
@@ -27,12 +29,7 @@ class Reserve extends Component {
             sendConfirm: "unchecked",
             reminder: true,
             formInvalid: false,
-
-            messageShow: false,
-            messageKind: "success",
-            messageTitle: "Successful",
-            messageSubtitle:"Nothin"
-
+            messages: []
         };
 
 
@@ -45,6 +42,7 @@ class Reserve extends Component {
         this.handleTimeChange = this.handleTimeChange.bind(this);
 
         this.submitButton = this.submitButton.bind(this);
+        this.addMessage = this.addMessage.bind(this);
 
     }
 
@@ -86,21 +84,9 @@ class Reserve extends Component {
         fetch("http://127.0.0.1:8000/api/reservations/reservation/", conf).then(
             response => {
                 if (response.status !== 201) {
-                    return this.setState({
-                        formInvalid: true,
-                        messageShow: true,
-                        messageKind: "error",
-                        messageTitle: response.status + " : " + response.statusText,
-                        messageSubtitle: "",
-                    })
+                    return this.addMessage("error", response.status.toString(), response.statusText)
                 }
-                return this.setState({
-                        formInvalid: false,
-                        messageShow: true,
-                        messageKind: "success",
-                        messageTitle: response.status + " : " + response.statusText,
-                        messageSubtitle: response.statusText,
-                    })
+                return this.addMessage("success", "Success", "We have reserved a table for you!")
             }
         )
     };
@@ -172,6 +158,30 @@ class Reserve extends Component {
         return null;
     }
 
+    addMessage(kind, title, subtitle) {
+        this.setState(previousState => ({
+        messages: [...previousState.messages, {
+        title: title,
+        kind: kind,
+        subtitle:subtitle
+    }]
+    }));
+
+        // let messages = this.state.messages;
+        // let message = <ToastNotification
+        //     title={title}
+        //     kind={kind}
+        //     subtitle={subtitle}
+        //     timeout={10000}
+        // />;
+        //
+        // messages.push(message);
+        //
+        // const item = document.getElementById("messages");
+        // ReactDOM.render(messages, item)
+    }
+
+
 
     render() {
         return (
@@ -189,16 +199,6 @@ class Reserve extends Component {
                         Reserve a table
                     </BreadcrumbItem>
                 </Breadcrumb>
-                { this.state.messageShow ? (
-                    <ToastNotification
-                        className={"reserve__messages"}
-                        title={this.state.messageTitle}
-                        subtitle={this.state.messageSubtitle}
-                        kind={this.state.messageKind}
-                    />
-                    ) : null
-
-                }
                 <div className={"reserve__progress"}>
                     <ProgressIndicator
                         currentIndex={this.state.currentStep - 1}
@@ -281,7 +281,11 @@ class Reserve extends Component {
                 <div className="geometry geometry--2">
                     <img src="static/img/drawing.svg" alt="decoration geometry"/>
                 </div>
-
+                <Messages
+                    id={"messages"}
+                    messages={this.state.messages}
+                >
+                </Messages>
             </div>
         );
     }
