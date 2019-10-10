@@ -92,7 +92,7 @@ class Reserve extends Component {
                 this.addMessage("error", title, error.response.data)
         })
     };
-    
+
 
     _next() {
         let currentStep = this.state.currentStep;
