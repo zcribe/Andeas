@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ReactDOM from "react-dom";
+import axios from 'axios';
 
 import Form from "carbon-components-react/lib/components/Form/Form";
 import {Breadcrumb, BreadcrumbItem, ProgressIndicator, ProgressStep} from "carbon-components-react"
@@ -29,7 +30,8 @@ class Reserve extends Component {
             sendConfirm: "unchecked",
             reminder: true,
             formInvalid: false,
-            messages: []
+            messages: [],
+            errors: []
         };
 
 
@@ -81,15 +83,16 @@ class Reserve extends Component {
             body: JSON.stringify(lead),
             headers: new Headers({"Content-Type": "application/json"})
         };
-        fetch("http://127.0.0.1:8000/api/reservations/reservation/", conf).then(
-            response => {
-                if (response.status !== 201) {
-                    return this.addMessage("error", response.status.toString(), response.statusText)
-                }
-                return this.addMessage("success", "Success", "We have reserved a table for you!")
-            }
-        )
+        axios.post("http://127.0.0.1:8000/api/reservations/reservation/", conf)
+            .then(response => {
+                console.log(response.data)})
+            .catch(error => {
+                this.setState({errors: error.response.data })
+                const title = error.response.statusText.toString()
+                this.addMessage("error", title, error.response.data)
+        })
     };
+    
 
     _next() {
         let currentStep = this.state.currentStep;
@@ -161,24 +164,11 @@ class Reserve extends Component {
     addMessage(kind, title, subtitle) {
         this.setState(previousState => ({
         messages: [...previousState.messages, {
-        title: title,
-        kind: kind,
-        subtitle:subtitle
+            title: title,
+            kind: kind,
+            subtitle:subtitle
     }]
     }));
-
-        // let messages = this.state.messages;
-        // let message = <ToastNotification
-        //     title={title}
-        //     kind={kind}
-        //     subtitle={subtitle}
-        //     timeout={10000}
-        // />;
-        //
-        // messages.push(message);
-        //
-        // const item = document.getElementById("messages");
-        // ReactDOM.render(messages, item)
     }
 
 
