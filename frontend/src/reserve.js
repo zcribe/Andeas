@@ -26,7 +26,7 @@ class Reserve extends Component {
             email: "",
             phone: "",
             check: "",
-            table: 0,
+            table: 1,
             sendConfirm: "unchecked",
             reminder: true,
             formInvalid: false,
@@ -53,6 +53,19 @@ class Reserve extends Component {
         this.setState({
             [name]: value
         })
+
+        if (name === "email"){
+            console.log("1");
+        } else if (name === "phone") {
+            if (!Number(value)){
+                this.setState(prevState => ({
+                        errors: {...prevState, phone: "Phone number needs to be a a number"}
+                    }
+                ))
+            } else {
+                delete this.state.errors.phone
+            }
+        }
     }
 
     handleRadioChange(value) {
@@ -76,21 +89,38 @@ class Reserve extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        const {name, email, phone, people, reminder, table,} = this.state;
-        const lead = {name, email, phone, people, reminder, table,};
+        // const {name, email, phone, people, reminder, table,} = this.state;
+        // const lead = {people, name, email, phone, reminder, table};
+
+        const body = {
+            name: this.state.name,
+            email: this.state.email,
+            phone: this.state.phone,
+            people: this.state.people,
+            reminder: this.state.reminder,
+            table: this.state.table
+        };
+
         const conf = {
             method: "post",
-            body: JSON.stringify(lead),
+            body: body,
             headers: new Headers({"Content-Type": "application/json"})
         };
-        axios.post("http://127.0.0.1:8000/api/reservations/reservation/", conf)
+
+
+        axios.post("http://127.0.0.1:8000/api/reservations/reservation/", body, conf)
             .then(response => {
-                console.log(response.data)})
+                if (response.status === 201) {
+                    const title = response.statusText.toString()
+                    this.addMessage("success", title, response.data)
+                }
+
+            })
             .catch(error => {
-                this.setState({errors: error.response.data })
+                this.setState({errors: error.response.data})
                 const title = error.response.statusText.toString()
                 this.addMessage("error", title, error.response.data)
-        })
+            })
     };
 
 
@@ -163,14 +193,13 @@ class Reserve extends Component {
 
     addMessage(kind, title, subtitle) {
         this.setState(previousState => ({
-        messages: [...previousState.messages, {
-            title: title,
-            kind: kind,
-            subtitle:subtitle
-    }]
-    }));
+            messages: [...previousState.messages, {
+                title: title,
+                kind: kind,
+                subtitle: subtitle
+            }]
+        }));
     }
-
 
 
     render() {
@@ -198,12 +227,23 @@ class Reserve extends Component {
                             label={"1: Reserve"}
                             description={"Step 1: The date and time"}
                             secondaryLabel={"When?"}
+                            invalid={
+                                !!this.state.errors["date"] ||
+                                !!this.state.errors["time"] ||
+                                !!this.state.errors["people"]
+                            }
 
                         />
                         <ProgressStep
                             label={"2: Contact"}
                             description={"Step 2: Contact information"}
                             secondaryLabel={"Who do we let in?"}
+                            invalid={
+                                !!this.state.errors["name"] ||
+                                !!this.state.errors["email"] ||
+                                !!this.state.errors["phone"] ||
+                                !!this.state.errors["check"]
+                            }
 
 
                         />
@@ -230,6 +270,7 @@ class Reserve extends Component {
                             people={this.state.people}
                             date={this.state.date}
                             time={this.state.time}
+                            errors={this.state.errors}
 
                         />
                         <StageTwo
@@ -239,6 +280,8 @@ class Reserve extends Component {
                             email={this.state.email}
                             phone={this.state.phone}
                             check={this.state.check}
+                            errors={this.state.errors}
+
                         />
                         <StageThree
                             currentStep={this.state.currentStep}
@@ -251,6 +294,8 @@ class Reserve extends Component {
                             date={this.state.date}
                             time={this.state.time}
                             sendConfirmation={this.state.sendConfirm}
+                            errors={this.state.errors}
+
                         />
                         <div className={"reserve__progress-navs"}>
                             {this.previousButton()}
