@@ -7,7 +7,7 @@ Restaurant brochure website in order to learn:
 
 ## Index:
 4 in 1 page layout
-![1](https://github.com/zcribe/andeas/blob/master/docs/images/andeas.png)
+![1](https://github.com/zcribe/andeas/blob/master/docs/images/andeas.jpg)
 
 ## Reserve a table :
 Simple reserve form
