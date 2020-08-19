@@ -45,7 +45,7 @@
     "file-loader": "^6.0.0",
     "google-maps-react": "^2.0.2",
     "moment": "^2.24.0",
-    "pigeon-maps": "^0.15.0",
+    "pigeon-maps": "^0.16.0",
     "pigeon-marker": "^0.3.4",
     "pigeon-overlay": "^0.2.3",
     "pure-react-carousel": "^1.22.0",
