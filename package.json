@@ -36,21 +36,21 @@
     "webpack-dev-server": "3.11.0"
   },
   "dependencies": {
-    "@carbon/grid": "^10.6.0",
-    "@carbon/icons-react": "^10.6.0",
-    "axios": "^0.19.0",
-    "carbon-components": "^10.6.1",
-    "carbon-components-react": "^7.6.1",
+    "@carbon/grid": "^10.15.0",
+    "@carbon/icons-react": "^10.17.0",
+    "axios": "^0.19.2",
+    "carbon-components": "^10.19.0",
+    "carbon-components-react": "^7.19.0",
     "carbon-icons": "^7.0.7",
-    "file-loader": "^6.0.0",
-    "google-maps-react": "^2.0.2",
-    "moment": "^2.24.0",
-    "pigeon-maps": "^0.16.0",
+    "file-loader": "^6.1.0",
+    "google-maps-react": "^2.0.6",
+    "moment": "^2.28.0",
+    "pigeon-maps": "^0.16.1",
     "pigeon-marker": "^0.3.4",
     "pigeon-overlay": "^0.2.3",
-    "pure-react-carousel": "^1.22.0",
-    "react-image-gallery": "^1.0.0",
-    "react-router-dom": "^5.0.1",
+    "pure-react-carousel": "^1.27.3",
+    "react-image-gallery": "^1.0.8",
+    "react-router-dom": "^5.2.0",
     "react-truncate": "^2.4.0"
   }
 }
