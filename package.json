@@ -30,7 +30,7 @@
     "sass-loader": "10.1.0",
     "style-loader": "1.2.1",
     "weak-key": "1.0.2",
-    "webpack": "4.44.1",
+    "webpack": "5.0.0",
     "webpack-bundle-tracker": "0.4.3",
     "webpack-cli": "3.3.12",
     "webpack-dev-server": "3.11.2"
