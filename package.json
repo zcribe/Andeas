@@ -44,7 +44,7 @@
     "carbon-icons": "^7.0.7",
     "file-loader": "^6.0.0",
     "google-maps-react": "^2.0.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "pigeon-maps": "^0.19.0",
     "pigeon-marker": "^0.3.4",
     "pigeon-overlay": "^0.2.3",
