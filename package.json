@@ -32,7 +32,7 @@
     "weak-key": "1.0.3",
     "webpack": "5.76.0",
     "webpack-bundle-tracker": "1.8.1",
-    "webpack-cli": "4.9.2",
+    "webpack-cli": "4.10.0",
     "webpack-dev-server": "4.1.1"
   },
   "dependencies": {
