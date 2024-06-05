@@ -22,7 +22,7 @@
     "babel-preset-react": "6.24.1",
     "css-loader": "6.11.0",
     "fast-sass-loader": "2.0.1",
-    "mini-css-extract-plugin": "2.8.1",
+    "mini-css-extract-plugin": "2.9.0",
     "node-sass": "9.0.0",
     "prop-types": "15.8.1",
     "react": "16.14.0",
